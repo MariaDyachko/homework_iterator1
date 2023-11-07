@@ -14,8 +14,9 @@ public class Randoms implements Iterable<Integer> {
         Random random = new Random();
         while (true) {
             int randomNumber = random.nextInt(a, b + 1);
-            numbers.add(randomNumber);
-            if (randomNumber == 100) {
+            try {
+                numbers.add(randomNumber);
+            } catch (OutOfMemoryError e) {
                 break;
             }
         }
@@ -35,37 +36,14 @@ public class Randoms implements Iterable<Integer> {
                 return false;
             }
 
-
             @Override
             public Integer next() {
                 int num = numbers.get(next);
                 next++;
                 return num;
             }
+
+
         };
     }
 }
-
-
-//    protected Random random;
-//
-//    public Randoms(int min, int max) {
-//        //...
-//    }
-//
-//    @Override
-//    public Iterator<Integer> iterator() {
-//        return null;
-//    }
-//
-//    @Override
-//    public void forEach(Consumer<? super Integer> action) {
-//        Iterable.super.forEach(action);
-//    }
-//
-//    @Override
-//    public Spliterator<Integer> spliterator() {
-//        return Iterable.super.spliterator();
-//    }
-//
-//    //...
